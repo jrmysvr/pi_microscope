@@ -26,9 +26,29 @@ _`cmdline.txt`_
 
 ---
 
+# Setup streaming with gstreamer
+
+On the Pi:
+
+```bash
+DEST_IP=10.42.0.1 # IP of PC when connected to Pi via USB OTG
+
+gst-launch-1.0 -v rpicamsrc num-buffers=-1 ! video/x-raw,width=640,height=480, framerate=41/1 ! timeoverlay time-mode="buffer-time" ! jpegenc !  rtpjpegpay !  udpsink host=DEST_IP port=5001
+```
+_start_pi_stream_
+
+On the PC
+```bash
+gst-launch-1.0 udpsrc port=5001 ! application/x-rtp,encoding-name=JPEG,payload=26 ! rtpjpegdepay ! jpegdec ! autovideosink
+```
+_consume_pi_stream__
+
+---
+
 ## References:
 https://hackaday.io/project/167996-pi-microscope
 https://www.circuitbasics.com/raspberry-pi-zero-ethernet-gadget/
+https://www.raspberrypi.org/forums/viewtopic.php?t=213397
 
 ---
 ## Troubleshooting:
