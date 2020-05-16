@@ -68,7 +68,7 @@ _start_pi_stream_
 ```bash
 DEST_IP=10.42.0.1 # IP of PC when connected to Pi via USB OTG
 
-gst-launch-1.0 -v rpicamsrc num-buffers=-1 ! video/x-raw,width=640,height=480, framerate=41/1 ! timeoverlay time-mode="buffer-time" ! jpegenc !  rtpjpegpay !  udpsink host=DEST_IP port=5001
+gst-launch-1.0 -v rpicamsrc num-buffers=-1 ! video/x-raw,width=640,height=480, framerate=30/1 ! timeoverlay time-mode="buffer-time" ! jpegenc !  rtpjpegpay !  udpsink host=DEST_IP port=5001
 ```
 
 ## GStreamer on the PC
@@ -78,6 +78,31 @@ _consume_pi_stream_
 gst-launch-1.0 udpsrc port=5001 ! application/x-rtp,encoding-name=JPEG,payload=26 ! rtpjpegdepay ! jpegdec ! autovideosink
 ```
 
+## Consume the stream with an SDP file
+
+_More debugging is needed for this to work_
+
+> vlc stream.sdp
+
+_However, this does work..._
+```python
+import os
+import cv2
+
+os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "protocol_whitelist;file,rtp,udp"
+
+cap = cv2.VideoCapture('stream.sdp')
+while(cap.isOpened()):
+    ret, frame = cap.read()
+    cv2.imshow('frame', frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+```
+
 ---
 
 ## References:
@@ -85,7 +110,9 @@ gst-launch-1.0 udpsrc port=5001 ! application/x-rtp,encoding-name=JPEG,payload=2
 - https://www.circuitbasics.com/raspberry-pi-zero-ethernet-gadget/
 - https://www.raspberrypi.org/forums/viewtopic.php?t=213397
 - https://www.raspberrypi.org/forums/viewtopic.php?t=171791
-
+- https://en.wikipedia.org/wiki/Session_Description_Protocol
+- https://developer.ridgerun.com/wiki/index.php/Introduction_to_network_streaming_using_GStreamer
+- http://gstreamer-devel.966125.n4.nabble.com/SDP-file-with-VLC-td4676852.html
 ---
 ## Troubleshooting:
 

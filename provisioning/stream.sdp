@@ -1,0 +1,6 @@
+v=0
+o=pi IN IP4 10.42.0.136:5001
+s=Pi Microscope Stream
+m=video 5001 RTP/AVP 26
+c=IN IP4 10.42.0.136
+u=https://github.com/jrmysvr/pi_microscope
