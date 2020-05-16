@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+DIR=$(dirname $(realpath $0))
+
+. env/bin/activate
+python gui.py

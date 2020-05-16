@@ -1,0 +1,32 @@
+#:kivy 1.11.0
+
+<MicroscopeCamera>:
+    button0: start_button
+    button1: pause_button
+    button2: capture_button
+
+    StartButton:
+        id: start_button
+        text: 'Start'
+        on_release: self.parent.start_camera()
+        center_x: self.parent.center_x - 55
+        center_y: 50
+        height: 50
+
+    PauseButton:
+        id: pause_button
+        text: 'Pause'
+        on_release: self.parent.pause_camera()
+        center_x: self.parent.center_x + 55
+        center_y: 50
+        height: 50
+
+    CaptureButton:
+        id: capture_button
+        text: 'Capture'
+        on_release: self.parent.capture_image()
+        center_x: self.parent.center_x + 200
+        center_y: 50
+        height: 50
+
+
