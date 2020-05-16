@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=false
+Path=/home/jeremy/programming/pi_microscope/gui/python
+Exec=/home/jeremy/programming/pi_microscope/gui/python/run
+Name=Pi Zero Microscope GUI
+StartupNotify=true
+Icon=/home/jeremy/programming/pi_microscope/gui/python/icons/raspberry.ico
