@@ -48,6 +48,20 @@ _(that will power the Pi and enable connection)_
 > cd /home/pi
 > bash install.sh
 
+### After the update and installation
+
+Enter the following into `/etc/NetworkManager/conf.d/100-disable-wifi-mac-randomization.conf`
+
+```
+[connection]
+wifi.mac-address-randomization=1
+
+[device]
+wifi.scan-rand-mac-address=no
+```
+
+_This should prevent the MAC address from changing each reboot_
+
 ## Enable the camera on the Pi:
 
 >raspi-config
@@ -113,6 +127,7 @@ cv2.destroyAllWindows()
 - https://en.wikipedia.org/wiki/Session_Description_Protocol
 - https://developer.ridgerun.com/wiki/index.php/Introduction_to_network_streaming_using_GStreamer
 - http://gstreamer-devel.966125.n4.nabble.com/SDP-file-with-VLC-td4676852.html
+- https://github.com/debian-pi/raspbian-ua-netinst/issues/471
 ---
 ## Troubleshooting:
 
