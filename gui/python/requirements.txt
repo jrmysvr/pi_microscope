@@ -16,5 +16,5 @@ pyflakes==2.2.0
 pygame==1.9.6
 Pygments==2.7.4
 requests==2.23.0
-urllib3==1.25.9
+urllib3==1.26.5
 zipp==3.1.0
